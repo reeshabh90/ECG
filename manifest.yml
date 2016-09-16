@@ -1,0 +1,10 @@
+applications:
+- disk_quota: 1024M
+  host: ecg-analysis
+  name: ecg-analysis
+  command: python runserver.py
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 128M
+

@@ -1,0 +1,22 @@
+{
+  "name": "stream",
+  "version": "3.46.1",
+  "main": "stream.min.js",
+  "description": "'stream' nodejs core module browserify-ied with `--standalone stream`. Should support all module systems (commonjs, AMD & `window.stream`) - check browserify docs.",
+  "keywords": [
+    "nodejs",
+    "browserify",
+    "stream"
+  ],
+  "homepage": "https://github.com/anodynos/node2web_stream",
+  "_release": "3.46.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.46.1",
+    "commit": "3f5526b8692d9369f704b3f57aecc4cd048c2bbd"
+  },
+  "_source": "https://github.com/anodynos/node2web_stream.git",
+  "_target": "^3.46.1",
+  "_originalSource": "stream",
+  "_direct": true
+}

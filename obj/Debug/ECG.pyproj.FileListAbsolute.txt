@@ -1,0 +1,13 @@
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\attach_server.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\visualstudio_py_debugger.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\visualstudio_py_repl.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\visualstudio_py_util.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\__init__.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\__main__.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\bin\AzureSetup.cfg
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\bin\wfastcgi.py
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\web.config
+C:\Users\Rupam\Desktop\RUPAM\COLLEGES\ABHI_AND_ME\CodeHealthy\ECG\obj\Debug\web.debug.config

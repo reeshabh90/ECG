@@ -1,0 +1,23 @@
+{
+  "name": "FlaskWebProject1",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.2.0",
+    "jquery": "2.1.1",
+    "d3": "3.4.11",
+    "webcamjs": "^1.0.9",
+    "clmtrackr": "*",
+    "jsfeat": "^0.0.8"
+  }
+}

@@ -1,0 +1,228 @@
+<head>
+    <style type="text/css">
+        #Text1 {
+            width: 514px;
+        }
+    </style>
+</head>
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}.</h2>
+
+ <script src={{ url_for('static', filename='./bower_components/tracking/build/tracking-min.js') }}></script>
+ <script src={{ url_for('static', filename='./bower_components/tracking/build/data/face-min.js') }}></script>
+  <script src={{ url_for('static', filename='./bower_components/tracking/build/dat.gui.min.js') }}></script>
+   <script src={{ url_for('static', filename='./bower_components/tracking/build/dat.gui.min.js') }}></script>
+ 
+
+  
+
+
+  <div class="demo-title">
+    <p><a href="http://trackingjs.com" target="_parent">tracking.js</a> － get user's webcam and detect faces</p>
+      <p>
+          <input id="Text1" type="text" /></p>
+  </div>
+ <form method="post" action="{{ url_for('face_stat') }}">
+<input type="hidden" name="tag_list" id="tag_list" value="" />
+
+     </form>
+  <div class="demo-frame">
+    <div class="demo-container">
+      <video id="video" width="320" height="240" width="320" height="240"></video>
+      <canvas id="canvas" width="320" height="240" ></canvas>
+    </div>
+  </div>
+
+  <script>
+      var xc = 0, yc = 0;
+      var lineData = [];
+      var dist = 0; //width/10
+      var n = 0;// point num
+      window.onload = function () {
+          var video = document.getElementById('video');
+          
+          var canvas = document.getElementById('canvas');
+          var context = canvas.getContext('2d');
+
+          var tracker = new tracking.ObjectTracker('face');
+          tracker.setInitialScale(4);
+          tracker.setStepSize(2);
+          tracker.setEdgesDensity(0.1);
+
+          tracking.track('#video', tracker, { camera: true });
+
+          tracker.on('track', function (event) {
+              context.clearRect(0, 0, canvas.width, canvas.height);
+              var result = [];
+              dist = 0;
+              event.data.forEach(function (rect) {
+                  result.push({'x':rect.x,'y':rect.y,'width':rect.width,'height':rect.height});
+                  context.strokeStyle = '#a64ceb';
+                  context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                  context.font = '11px Helvetica';
+                  context.fillStyle = "#fff";
+                  context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                  context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                  context.fillText('CENTER-*-PYTHON', xc, yc);
+                  dist = rect.width / 2;
+              });
+              var s = JSON.stringify(result);
+              $('#tag_list').val(s);
+              console.log(s);
+              
+              /// Now post this data to face_stat
+              $.ajax({
+                  url: '/face_stat',
+                  crossDomain:true, 
+                  dataType: "json",
+                  data: { 'stat': JSON.stringify(result) },
+                  type: 'POST',
+                  success: function (response)
+                  {
+                      
+                      var data = JSON.parse(response);
+                    // alert(data)
+                       xc = data['xc'];
+                       yc = data['yc'];
+                      
+                          
+                           console.log('ha ha ' + response);
+
+                           $('#Text1').val("Python:: xc=" + xc + ' yc:' + yc);
+                           if (xc > 0)
+                           {
+                               if (lineData.length > 1000) {
+                                   lineData=[];
+                               }
+                               lineData.push({ x: xc, y: yc, r: dist, num: n })
+                               n++
+                               InitChart();
+                               scatterPlot();
+                          }
+
+                  },
+                  error: function (error)
+                  {
+                      //alert(error);
+                      console.log('chi chi'+error);
+                  }
+              });
+          });
+
+         
+      };
+      function scatterPlot() {
+          var svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 300);
+
+          svg.selectAll("circle")
+         .data(lineData)
+         .enter()
+          .append("circle")
+
+          .attr("cx", function (d) {
+              return d.x;
+          })
+   .attr("cy", function (d) {
+       return d.y;
+   })
+   .attr("r", function (d) {
+       return Math.sqrt(d.r);
+   }).attr('stroke', 'green')
+          .attr('stroke-width', 2)
+          .attr('fill', 'none');
+
+          svg.selectAll("text")
+   .data(dataset)
+   .enter()
+   .append("text")
+
+          .text(function (d) {
+              return d.x + "," + d.y;
+          })
+           .attr("x", function (d) {
+               return d.x;
+           })
+   .attr("y", function (d) {
+       return d.y;
+   })
+          .attr("font-family", "sans-serif")
+   .attr("font-size", "11px")
+   .attr("fill", "red");
+      }
+      function InitChart() {
+          //alert('Line chart Demo')
+         
+          d3.selectAll("svg > *").remove();
+          var vis = d3.select('#chart'),
+         WIDTH = 400,
+          HEIGHT = 300,
+          MARGINS = {
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 0
+          },
+          xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(lineData, function (d) {
+              return d.num;
+          }), d3.max(lineData, function (d) {
+              return d.num;
+          })]),
+          yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(lineData, function (d) {
+              return d.r;
+          }), d3.max(lineData, function (d) {
+              return d.r;
+          })]),
+          xAxis = d3.svg.axis()
+            .scale(xRange)
+            .tickSize(5)
+            .tickSubdivide(true),
+          yAxis = d3.svg.axis()
+            .scale(yRange)
+            .tickSize(5)
+            .orient('left')
+            .tickSubdivide(true);
+
+          vis.append('svg:g')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0,' + (HEIGHT - MARGINS.bottom) + ')')
+            .call(xAxis);
+
+          vis.append('svg:g')
+            .attr('class', 'y axis')
+            .attr('transform', 'translate(' + (MARGINS.left) + ',0)')
+            .call(yAxis);
+
+          var lineFunc = d3.svg.line()
+          .x(function (d) {
+              return xRange(d.num);
+          })
+          .y(function (d) {
+              return yRange(d.r);
+          })
+          .interpolate('linear');
+
+          vis.append('svg:path')
+          .attr('d', lineFunc(lineData))
+          .attr('stroke', 'blue')
+          .attr('stroke-width', 2)
+          .attr('fill', 'none');
+      }
+  </script>
+&nbsp;</p>
+<Image height="340"></Image>
+ <div class="container">
+    </div>
+    <script src={{ url_for('static', filename='./bower_components/jquery/dist/jquery.min.js') }}></script>
+    <script src={{ url_for('static', filename='./bower_components/bootstrap/dist/js/bootstrap.min.js') }}></script>
+    <script src={{ url_for('static', filename='./bower_components/d3/d3.min.js') }}></script>
+   
+  <svg id="chart" width="500" height="300"></svg>
+
+{% endblock %}
+

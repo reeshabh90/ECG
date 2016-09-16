@@ -1,0 +1,10 @@
+applications:
+- disk_quota: 1024M
+  host: stream1-rupam
+  name: stream1-rupam
+  command: node app.js
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 128M
+
