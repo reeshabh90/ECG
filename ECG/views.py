@@ -18,7 +18,7 @@ def home():
         'index.html',
         title='Home Page',
         year=datetime.now().year,
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
     )
 
 @app.route('/contact')
@@ -29,7 +29,7 @@ def contact():
         title='Contact',
         year=datetime.now().year,
         message='Rupams Contact.',
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
     )
 
 @app.route('/about')
@@ -39,10 +39,10 @@ def about():
         'about.html',
         title='About',
         year=datetime.now().year,
-        message='ECG Analyzer- The retail revolution',
+        message='Hridalysis- The ECG Cardio revolution',
         email='rupam.iics@gmail.com',
         phone='+919845048861',
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
 
     )
 
@@ -53,7 +53,7 @@ def form():
     return render_template(
     'form_submit.html',
      year=datetime.now().year,
-     app_name='ECG Analyzer',
+     app_name='Hridalysis',
     
    
     )
@@ -62,7 +62,7 @@ def fact():
     return render_template(
     'factorial_submit.html',
      year=datetime.now().year,
-     app_name='ECG Analyzer',
+     app_name='Hridalysis',
     
    
     )
@@ -105,9 +105,9 @@ def ecg():
         chart_height = 550;
         chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,"width": 1000}
         series = [ {"name": 'Lead '+str(lno), "data": L2},{"name": 'Rpeak', "data": Rdata},{"name": 'Tpeak', "data": Tdata},{"name": 'Ppeak', "data": Pdata},{"name": 'Qpeak', "data": Qdata},{"name": 'Speak', "data": Sdata}]
-        title = {"text": 'ECG Signal of Lead '+str(lno)}
+        title = {"text": 'Raw ECG Signal of Lead '+str(lno)}
         xAxis = {"categories": ['xAxis Data1', 'xAxis Data2', 'xAxis Data3']}
-        yAxis = {"title": {"text": 'Aplitude'}}
+        yAxis = {"title": {"text": 'Amplitude'}}
         return render_template(
           'chart.html', 
            chartID=chartID, 
@@ -123,7 +123,7 @@ def ecg():
         )
     except  Exception:
         if traceback.format_exc().find("url")!=-1:
-            tab='<h2><p style = "color: red">Data Fetch Time out. Go back and try again</p></h2>'+tab+'<br/>'
+            tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+'<br/>'
         else:
             tab='<h2><p style = "color: red">Cant Process The Signal </p></h2>'+tab+'<br/>'+traceback.format_exc()
         chartID = 'ecgChart';
@@ -133,7 +133,7 @@ def ecg():
         series = [ {"name": 'Lead '+str(lno), "data": L2}]
         title = {"text": 'ECG Signal of Lead '+str(lno)}
         xAxis = {"categories": ['xAxis Data1', 'xAxis Data2', 'xAxis Data3']}
-        yAxis = {"title": {"text": 'Aplitude'}}
+        yAxis = {"title": {"text": 'Amplitude'}}
         return render_template(
               'chart.html', 
                chartID=chartID, 
@@ -148,11 +148,37 @@ def ecg():
                app_name='ECG',
         )
        
+import atexit
+from time import time
+from datetime import timedelta
+
+def secondsToStr(t):
+    return str(timedelta(seconds=t))
+
+line = "="*40
+def log(s, elapsed=None):
+    print(line)
+    print(secondsToStr(time()), '-', s)
+    if elapsed:
+        print("Elapsed time:", elapsed)
+    print(line)
+    print()
+
+def endlog(start):
+    end = time()
+    elapsed = end-start
+    return  secondsToStr(elapsed)
+
+def now():
+    return secondsToStr(time())
+
+
 
 def hello():
     import matplotlib
     matplotlib.use('Agg')
     #matplotlib.pyplot.close("all")
+    start = time()
     global lno
     global leads
     global tab
@@ -166,19 +192,23 @@ def hello():
     global Sdata
     global sr
     url=request.form['url']
-    
+    adu=int(request.form['adu'])
     lno=int(request.form['lno'])-1
     sr=int(request.form['sr'])#Sampling rate in Hz ( samples/sec)
     import pandas as pd;
+    import matplotlib.pyplot as plt, mpld3
+    import numpy as np
+    
     df=pd.read_csv(url)
-    tab=df.head().to_html();
+    tab='Analysis of Lead '+ str(lno+1) + ' of Signal:<br/>'+ url+'<hr/>'
+    #tab=df.head().to_html();
     
     leads=list(df.columns.values)
     if lno > len(leads):
         tab='<p style = "color: blue">Invalid Lead No.+ Only '+str(len(leads))+ ' present</p>'
         
-   
-    l2=df[leads[lno]].values
+    na=np.array(df[leads[lno]].values)
+    l2=np.around( na/adu,4)
     lno=lno+1;#asking user to enter between 1-12, lead is actually between 0-11
     L2=[];
     for index in range(len(l2)):
@@ -186,8 +216,7 @@ def hello():
         
 
     # Entire ECg Signal Processing Calculation-------------
-    import matplotlib.pyplot as plt, mpld3
-    import numpy as np
+    
     
     N=len(l2)
     #ECG Signal is between .005Hz to 30Hz
@@ -241,12 +270,24 @@ def hello():
     rs=np.fft.ifft(z,N)
     rs=np.real(rs[1:N])
     
-   
+    from matplotlib.ticker import AutoMinorLocator
+    spacing=10
+    minorLocator =AutoMinorLocator(spacing)
+
     fig1=plt.figure(figsize=(12,5))
+    
+   
+    
     plt.plot(l2s);
+    
+    
     plt.grid();
-    plt.tight_layout();
-    plt.title('Noisy signal(With Base line Woner)')
+    plt.ylabel('Amplitude in mV->')
+    plt.xlabel('Samples->')  
+    plt.title('Noisy signal(With Base line Wonder)')
+    
+
+    fig1.tight_layout();
     tab=tab+'<br/>'+mpld3.fig_to_html(fig1)+'<br/>'
      #putting the filtered signal in l2s
     l2s=rs.copy();
@@ -254,6 +295,9 @@ def hello():
     plt.plot(rs)
     plt.grid();
     plt.title('Filtered Signal With ZC Adjustment')
+
+    plt.ylabel('Amplitude in mV->')
+    plt.xlabel('Samples->')  
     fig1.tight_layout()
     tab=tab+'<br/>'+mpld3.fig_to_html(fig1)+'<br/>'
     # Detecting And Plotting R-Peak................................
@@ -544,7 +588,8 @@ def hello():
     plt.hold(True)
     plt.plot(zs,color='black',label='s')
     plt.grid()
-
+    plt.ylabel('Amplitude in mV->')
+    plt.xlabel('Samples->')  
     plt.title('All-peak marked In Filtered ECG')
     plt.legend()
     plt.tight_layout();
@@ -761,7 +806,7 @@ def hello():
     
     
     stat['soff']=list(soff)
-    tab=tab+'<br/><h1>Statistical Data</h1><hr/>'
+    tab=tab+'<br/><h1>Statistical Data</h1><br/>All Amplitudes are in mV<br/>All locations are in Sample No.<hr/>'
     tab=tab+'<br/>'+stat.to_html()
     #--------------------- Analysis ---------------------------------------
     #BPM And Qrs Complex
@@ -1005,8 +1050,8 @@ def hello():
     if (avst!=0) and (st >160) and (Qtc>460) and (abnormal==0) and (pr_ratio>.02):
         abnormal=1
         diag='<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [Qtc>440,ST>160>Non isoelectric ST] Detected</b></p>'
-    if tp_slope>.1 and (qrs_ms<100 and (succ_tp>50 and succ_tp<500)) and abnormal==0:
-        diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [TP Slope>.1 @ normal Qrs and normal TP Segment] Detected</b></p>'
+    if tp_slope>.3 and (qrs_ms<100 and (succ_tp<50 or succ_tp>300)) and abnormal==0:
+        diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [TP Slope>.3 @ normal Qrs and Abnormal TP Segment] Detected</b></p>'
         diag=diag+'<br/>Suggests a possible valley between T and P'
         abnormal=1
     if ((qp <=0) or bpm<50 )and (abnormal==0) :
@@ -1076,7 +1121,7 @@ def hello():
     
     tab=tab+diag
     tab=tab+'<hr/>'
- 
+    tab=tab+'<i>Total Processing time='+endlog(start)+'</i>'
     #Heart Beat Rate============================== 
     #matplotlib.pyplot.close("all")
     # ECG Processing Completed-----------------------------
@@ -1092,7 +1137,7 @@ def factorial():
                            number=str(number), 
                            factorial=fact1,
                             year=datetime.now().year,
-                            app_name='ECG Analyzer',
+                            app_name='Hridayalysis',
 
 
                            )
@@ -1112,7 +1157,7 @@ def chart(chartID = 'chart_ID', chart_type = 'line', chart_height = 350):
         xAxis=xAxis, 
         yAxis=yAxis,
         year=datetime.now().year,
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
         )
 
 #thins method is working.. displaying a simple chart with python-nvd3
@@ -1159,7 +1204,7 @@ def data():
         html_part=chart.htmlcontent,
         scripts=chart.header_js,
         year=datetime.now().year,
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
         )
 
 #This method is for Creating Bubble chart
@@ -1169,7 +1214,7 @@ def data2():
     return render_template(
         'stock1.html', 
         year=datetime.now().year,
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
         )
 
 import csv
@@ -1227,7 +1272,7 @@ def cam():
         
         year=datetime.now().year,
        
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
     )
 ###############################
 ########## Face Tracking############
@@ -1236,7 +1281,7 @@ def face_tracking():
     return render_template(
                            'track.html',
                            year=datetime.now().year,
-                            app_name='ECG Analyzer',
+                            app_name='Hridalysis',
                            )
 #############################
 @app.route('/face_stat', methods=['GET','POST'])
@@ -1279,7 +1324,7 @@ def ECG():
     return render_template(
                            'ECG.html',
                            year=datetime.now().year,
-                            app_name='ECG Analyzer',
+                            app_name='Hridalysis',
                            )
 ######### Traffic accident data analysis
 @app.route('/traffic')
@@ -1301,6 +1346,6 @@ def traffic():
         title='About',
         year=datetime.now().year,
         message='This is Rupams First Flask App.',
-        app_name='ECG Analyzer',
+        app_name='Hridalysis',
 
     )

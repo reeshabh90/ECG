@@ -1,123 +1,2332 @@
+<head>
+    <style type="text/css">
+
+table.MsoTableGrid
+	{border:solid windowtext 1.0pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	}
+    </style>
+</head>
 {% extends "layout.html" %}
 
 {% block content %}
 
 <div class="jumbotron">
-    <h1>Online ECG Analyzer</h1>
-    <p class="lead">Provide an ECG csv File as input and get all the lead details</p>
-    
-</div>
+    <h1>Hridayalysis</h1>
 
+</div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            All you need to do is store an ECG file in csv format in dropbox and enter the url in ECG form.
-        </p>
-        <hr />
-        <h4>
-            Examples:
 
-        </h4>
-        <p>https://www.dropbox.com/s/dofkip9kma1jbpe/tw72.csv?dl=1</p>
-        <p>https://www.dropbox.com/s/ovsh1jiehhsthl5/tw72_small.csv?dl=1</p>
-        <p>https://www.dropbox.com/s/49h6h50pit1qlch/tw88.csv?dl=1</p>
-        
-    </div>
-    <div class="row">
-        <div class="col-md-4">
 
-<h2>Normal adult 12-lead ECG</h2>
-<p>The diagnosis of the normal electrocardiogram is made by excluding any recognised abnormality. It's description is therefore quite lengthy.
-<img src="ecgs/normfig.gif" align="right" border="0" hspace="5" vspace="5"></p>
-
-<ul>
-<li>normal sinus rhythm
-   <ul>
-   <li>each P wave is followed by a QRS
-   </li><li>P waves normal for the subject
-
-   </li><li>P wave rate 60 - 100 bpm with &lt;10% variation
-      <ul>
-      <li>rate &lt;60 = <a href="sbrady.html">sinus bradycardia</a>
-      </li><li>rate &gt;100 = <a href="stach.html">sinus tachycardia</a>
-      </li><li>variation &gt;10% = sinus arrhythmia
-      </li></ul>
-   </li></ul>
-</li><li>normal <a href="axis.html">QRS axis</a>
-</li><li>normal P waves
-   <ul>
-   <li>height &lt; 2.5 mm in lead II
-   </li><li>width &lt; 0.11 s in lead II
-      <ul>
-      <li>for abnormal P waves see <a href="rah.html">right atrial hypertrophy</a>, <a href="lvhlah.html">left atrial hypertrophy</a>, <a href="apb.html">atrial premature beat</a>, <a href="highk.html">hyperkalaemia</a>
-      </li></ul>
-   </li></ul>
-</li></ul>        </div>
-
-        <div class="col-md-4">
-          <h2></h2>
-          <p>
-</p><ul>
-<li>normal PR interval
-   <ul>
-   <li>0.12 to 0.20 s (3 - 5 small squares)
-      <ul>
-      <li>for short PR segment consider <a href="wpw.html">Wolff-Parkinson-White syndrome</a> or <a href="lgl.html">Lown-Ganong-Levine syndrome</a> (other causes - Duchenne muscular dystrophy, type II glycogen storage disease (Pompe's), HOCM)
-      </li><li>for long PR interval see <a href="lll.php">first degree heart block</a> and <a href="trifas.html">'trifasicular' block</a>
-      </li></ul>
-   </li></ul>
-</li><li>normal QRS complex
-   <ul>
-   <li>&lt; 0.12 s duration (3 small squares)
-      <ul>
-      <li>for abnormally wide QRS consider <a href="rbbb.html">right</a> or <a href="lbbbimi.html">left</a> bundle branch block, ventricular rhythm, <a href="highk.html">hyperkalaemia</a>, etc.
-      </li></ul>
-   </li><li>no <a href="oldmi.html">pathological Q waves</a>
-   </li><li>no evidence of <a href="lvhlah.html">left</a> or <a href="m_sten.html">right</a> ventricular hypertrophy
-   </li></ul>
-</li><li>normal QT interval
-   <ul>
-      <li>Calculate the corrected QT interval (QTc) by dividing the QT interval by the square root of the preceeding R - R interval. Normal = 0.42 s.
-      </li><li>Causes of <a href="l_qt.html">long QT interval</a>
-         <ul>
-            <li>myocardial infarction, myocarditis, diffuse myocardial disease
-            </li><li>hypocalcaemia, hypothyrodism
-            </li><li>subarachnoid haemorrhage, intracerebral haemorrhage
-            </li><li>drugs (e.g. sotalol, amiodarone)
-            </li><li>hereditary
-               <ul>
-                  <li><a href="l_qt.html">Romano Ward syndrome</a> (autosomal dominant)
-                  </li><li>Jervill + Lange Nielson syndrome (autosomal recessive) associated with sensorineural deafness
-               </li></ul>
-         </li></ul>
-      </li></ul>
-</li></ul>
-<p></p>
-          <!--p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p-->       </div>
-        <div class="col-md-4">
-          <h2></h2>
-          <p>
-</p><ul>
-<li>normal ST segment
-   <ul>
-   <li>no elevation or depression
-      <ul>
-      <li>causes of elevation include acute MI (e.g. <a href="ami.html">anterior</a>, <a href="infmi.html">inferior</a>), <a href="lbbbimi.html">left bundle branch block</a>, normal variants (e.g. athletic heart, Edeiken pattern, high-take off), acute pericarditis
-      </li><li>causes of depression include myocardial ischaemia, <a href="dig.html">digoxin effect</a>, <a href="lvhlah.html">ventricular hypertrophy</a>, <a href="postlat.html">acute posterior MI</a>, <a href="pe.php">pulmonary embolus</a>, <a href="lbbbimi.html">left bundle branch block</a>
-      </li></ul>
-   </li></ul>
-</li><li>normal T wave
-      <ul><ul>
-      <li>causes of tall T waves include <a href="highk.html">hyperkalaemia</a>, <a href="infmi.html">hyperacute myocardial infarction</a> and <a href="lbbbimi.html">left bundle branch block</a>
-      </li><li>causes of small, flattened or inverted T waves are numerous and include ischaemia, age, race, hyperventilation, anxiety, drinking iced water, <a href="lvhlah.html">LVH</a>, drugs (e.g. <a href="dig.html">digoxin</a>), pericarditis, <a href="pe.php">PE</a>, intraventricular conduction delay (e.g. <a href="rbbb.html">RBBB</a>)and electrolyte disturbance.
-      </li></ul></ul>
-</li><li>normal U wave
-</li></ul>
-<p></p>
-          <!--p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p-->        </div>
-      </div>
+    <p class="lead">Hridayalisis is a state of art ECG processing system that can detect the abonormality in an ECG signal. Several ECG diseases are also classified by the System.&nbsp; Provide an ECG csv File as input where each of the columns specify a particular lead&#39;s data, and get all the features associated with the leads.</p>
+    <p class="lead">Most of the modern day algorithms only detects Heart beat rate and classify the signal as sinus Normal or Abnormal based on the beat rate. But different diseases need different analysis and can be detected from different ECG properties.</p>
+    <p class="lead">Various algorithms incorporated with <strong>Ridayalysis </strong>is<strong> </strong>result of our research of over a decade.&nbsp; The Goal is to build the most comprehenssive ECG analysis on cloud that can help progonestics of ECG signals.</p>
+    <p class="lead">We are providing a database of signals collected from Physionet ATM for testing and validating our technique. Signals marked as red are false detection. <strong>&nbsp;</strong>&nbsp; </p>
+    <p class="lead"><strong>Sample Database</strong></p>
     
-</div>
 
+    
+    
+    <table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="width:559.95pt;margin-left:0pt;border-collapse:collapse;border:
+ none;mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:1184;mso-padding-alt:
+ 0cm 5.4pt 0cm 5.4pt" width="933" align="left">
+        <tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    Slno<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    URL<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    SR<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    ADC<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:1">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal"><o:p>&nbsp;</o:p></b></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Malignant Ventricular Ectopy<o:p></o:p></b></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:2">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/e9wrhaihel75z1k/mvectopy_418_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:3">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/9qtyzqxxsaur4q7/mvectopy_421_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:4">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/3hh8uiopx5vf4p6/mvectopy_423_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:5">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/d7ur9kmya9jbrss/mvectopy_420_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:6">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/i6tw4gy2sbac6u3/mvectopy_424_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:7">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/ay1ekpx4ajso8qf/mvectopy_425_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:8">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Sleep Apnoea<o:p></o:p></b></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:9">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/3suyht2f14mbeyo/apnea_a01_sr_100_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:10">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/zq6rge64yvihoh1/apnea_a02_sr_100_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:11">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/ymwe1vjn5qd2iyl/apnea_a06_sr_100_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:12">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/jewr7cqzdf5qks3/apnea_a07_sr_100_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:13">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/0pb584lrlq1odpn/apnea_a14_sr_100_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:14">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/c94xbdjtpkr5ktt/apnea_a18_sr_100_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    100<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:15">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Arterial Fibrillation<o:p></o:p></b></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:16">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/gx7bdqvuhwvix89/af_iaf1_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:17">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/vpb4laas58n6z69/af_iaf2_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:18">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/dz7jrc6dqbpxvhw/af_iaf3_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:19">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/h27vfftlovgjxrm/af_iaf4_sr_1000_adu_3227.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:20">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/g7jyf1cwq1u3sox/af_iaf5_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:21">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/3qlngvr70pish84/af_iaf6_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:22">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    7.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/dt0ck4dpy5ubyi4/af_iaf7_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:23">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    8.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/jytg2jaqissxyit/af_iaf8_sr_1000_adu_3227.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    1000<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    3227<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:24">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Normal ECG<o:p></o:p></b></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:25">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/7rn1oyac1eltqna/normal_mitbih_16420_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:26">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/szwn4ihn120r7y1/normal_mitbih_16483_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:27">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/lh0uskhcrkayltu/normal_mitbih_16539_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:28">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/n697l3og0ebwbl7/normal_mitbih_16773_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:29">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/gqd3b2pjggk40qx/normal_mitbih_16786_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:30">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/a4llbahvruhrkio/normal_mitbih_17052_sr_128_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:31">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    7.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/3ia8r8nq2x5v0ea/normal_mitbih_16795_sr_128_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:32">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    8.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/vz3g9vnf2cbpmz0/normal_mitbih_17453_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:33">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    9.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/cpaaoqtgdc86810/normal_mitbih_18177_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:34">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    10.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/k75z470a7o93xx0/normal_mitbih_18184_sr_128_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    128<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:35">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Ventricular Tachyarrhythmia <o:p></o:p></b>
+                </p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:36">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/b5go2pvx49xzo7i/vtecharrhymia_cu02_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:37">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/2j5cwm5e38n9yg8/vtecharrhymia_cu03_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:38">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/8ka865fj8ixfvpi/vtecharrhymia_cu04_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:39">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/s231z7klowl691g/vtecharrhymia_cu05_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:40">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/29ah7xxqz0r1yon/vtecharrhymia_cuo1_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:41">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/2immktvqfthahkx/vtecharrhymia_cu06_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:42">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    7.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/93vn4atazedzhyb/vtecharrhymia_cu08_sr_250_adu_400.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    400<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:43">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">Coronary Artery Disease ( Cad) 1,2 or 3 Vassals <o:p></o:p></b>
+                </p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:44">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/5gjnfemd4ihs4fs/cad_1vad_eustt_e0103_sr_250_adu_w00.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:45">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/7ti4f6eqebks8e8/cad_2vad_ladlcx_inf-my-infrac_eustt_e0104_sr_250_adu_w00.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:46">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/5rfkqrfgbiirzjx/cad_3vad_inf-my-infrac_eustt_e0105_sr_250_adu_w00.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:47">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/4aqzg3lc7t5qk6z/cad_2vad_ladlcx_e0106_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:48">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/i49459zodkskjb9/cad_1vad_lcx_e0107_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:49">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/7i96smv3vpq5jvh/cad_3vad_Ant-My-Infrac_e0108_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:50">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    7.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/06wyqfx9j04px5c/cad_2vad_ladlcx_e0110_sr_250_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:51">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    8.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/edvpwpkrh44zklw/cad_1vad_lad_e0111_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:52">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    9.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;color:red">https://www.dropbox.com/s/ia4ah8waduelunt/cad_2vad_ladrca_Hypertension_e0112_sr_250_adu_200.csv?dl=1</span><span style="color:red"><o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:53">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    10<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/hfpa2lo63mn5n3k/cad_3vad_Mixed-Angina_e0113_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:54">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    11.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/nc7g52holfm5fhl/cad_3vad_Art-Hypertension_e0114_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:55">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    12.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/damwln5mkokx6v6/cad_1vad_lcx_e0115_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:56">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    13.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/03phdszo9lyn5yb/cad_1vad_lad_Aorotic-Vulvular-Regurgiation_e0124_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:57">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    14.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/mqothzo515k1jf2/cad_1vad_lad_Aorotic-Vulvular-Regurgiation_Ant-MI_e0125_sr_250_adu_200.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:58">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    15.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/a9roczork5u54z4/cad_1vad_lad_Aorotic-Vulvular-Regurgiation_Ant-MI_e0126_sr_250_adu_200.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    250<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:59">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal">T Wave Alternans<o:p></o:p></b></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:60">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/nb3w7b5nuts6vht/twa_twa01_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:61">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/6eo5zqmn7tbcjtg/twa_twa02_sr_500_adu_2000.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:62">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/atoiyz1r7kpy9fc/twa_twa06_L1_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:63">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/lifrcns9l1i22bn/twa_twa09_L1_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:64">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/vur7tgss6aajou7/twa_twa10_sr_500_adu_2000.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:65">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    6.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/7ras9d8uyol52fa/twa_twa11_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:66">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    7.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/f3l8gj7wy0n26au/twa_twa13_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:67">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    8.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    https://www.dropbox.com/s/u88t5jp291sy1e3/twa_twa15_sr_500_adu_2000.csv?dl=1<o:p></o:p></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:68">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    9.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/eh2jumhtxkvu3yz/twa_twa17_sr_500_adu_2000.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:69">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    10.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:red">https://www.dropbox.com/s/52ty0wu4634maen/twa_twa18_sr_500_adu_2000.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    500<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    2000<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:70">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <b style="mso-bidi-font-weight:normal"><span style="color:black;
+  mso-themecolor:text1">Partial Epilepsy <o:p></o:p></span></b>
+                </p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:71">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    1.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/vz521ub41x8wql1/epilepsy_sz01_sr_200_adu_25.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    25<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:72">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    2.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/8m7u4hr0egq7xk9/epilepsy_sz02_sr_200_adu_25.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    25<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:73">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    3.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/y3zjmcr2lp4sqzd/epilepsy_sz03_sr_200_adu_25.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    200<o:p></o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    25<o:p></o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:74">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    4.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/w4oftj9trt30z6o/epilepsy_sz04_sr_200_adu_25.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:75">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    5.<o:p></o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1">https://www.dropbox.com/s/xd1bwecoxoyx5ck/epilepsy_sz06_sr_200_adu_25.csv?dl=1<o:p></o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:76">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1"><o:p>&nbsp;</o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:77">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1"><o:p>&nbsp;</o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:78;mso-yfti-lastrow:yes">
+            <td style="width:49.3pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="82">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:453.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="757">
+                <p class="MsoNormal">
+                    <span style="color:black;mso-themecolor:text1"><o:p>&nbsp;</o:p></span></p>
+            </td>
+            <td style="width:26.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="45">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+            <td style="width:29.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt" valign="top" width="50">
+                <p class="MsoNormal">
+                    <o:p>&nbsp;</o:p></p>
+            </td>
+        </tr>
+    </table>
+    
+    
+
+
+</div>
 {% endblock %}
+&nbsp;

@@ -3,17 +3,31 @@
 {% block content %}
             <div id="content">
                 <form method="post" action="{{ url_for('ecg') }}">
-                  <label for="url">ECG URL      :</label>
-                  <input type="text" name="url"  size="100"/><br />
-                  <label for="lno">Lead No.     :</label>
-                  <input type="text" name="lno"  size="50"/><br /> 
-                  <label for="sr">Sampling Rate :</label>
-                  <input type="text" name="sr"  size="20" value="500"/>Hz<br />
-                  
-                    <br />(for dropbox url trailing should be dl=1)
+                  <table>
+                  <tr>
+                  <td><label for="url">ECG URL:</label></td>
+                  <td><input type="text" name="url"  size="100"/></td>
+                  </tr>
+                  <tr>
+                  <td>
+                  <label for="lno">Lead No.     :</label></td>
+                  <td><input type="text" name="lno"  size="20" style="width: 33px" value="1"/></td>
+
+                  </tr>
+                  <tr>
+                  <td><label for="sr">Sampling Rate(Hz):</label></td>
+                  <td><input type="text" name="sr"  size="20" value="500" style="width: 55px"/></td>
+                  </tr>
+                   <tr>
+                   <td><label for="sr">ADU :</label></td>
+                  <td><input type="text" name="adu"  size="20" value="200" style="width: 55px"/></td>
+                  </tr>
+                       </table>
+                    (for dropbox url trailing should be dl=1)
                     <br />(ECG Lead No Must be between 1 to 12)
                     <br />
-                  <input type="submit" />
+                    <em>The signal may take 10-30s for processing</em><br />
+                  <input type="submit" value="Submit" onclick="this.form.submit();this.disabled = true; this.value = 'Processing';"/>
                 </form>
             </div>
     
