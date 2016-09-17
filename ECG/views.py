@@ -18,7 +18,7 @@ def home():
         'index.html',
         title='Home Page',
         year=datetime.now().year,
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
     )
 
 @app.route('/contact')
@@ -29,7 +29,7 @@ def contact():
         title='Contact',
         year=datetime.now().year,
         message='Rupams Contact.',
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
     )
 
 @app.route('/about')
@@ -39,10 +39,10 @@ def about():
         'about.html',
         title='About',
         year=datetime.now().year,
-        message='Hridalysis- The ECG Cardio revolution',
+        message='Hrydyalysis- The ECG Cardio revolution',
         email='rupam.iics@gmail.com',
         phone='+919845048861',
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
 
     )
 
@@ -53,7 +53,7 @@ def form():
     return render_template(
     'form_submit.html',
      year=datetime.now().year,
-     app_name='Hridalysis',
+     app_name='Hrydyalysis',
     
    
     )
@@ -62,7 +62,7 @@ def fact():
     return render_template(
     'factorial_submit.html',
      year=datetime.now().year,
-     app_name='Hridalysis',
+     app_name='Hrydyalysis',
     
    
     )
@@ -1137,7 +1137,7 @@ def factorial():
                            number=str(number), 
                            factorial=fact1,
                             year=datetime.now().year,
-                            app_name='Hridayalysis',
+                            app_name='Hrydyalysis',
 
 
                            )
@@ -1157,7 +1157,7 @@ def chart(chartID = 'chart_ID', chart_type = 'line', chart_height = 350):
         xAxis=xAxis, 
         yAxis=yAxis,
         year=datetime.now().year,
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
         )
 
 #thins method is working.. displaying a simple chart with python-nvd3
@@ -1204,7 +1204,7 @@ def data():
         html_part=chart.htmlcontent,
         scripts=chart.header_js,
         year=datetime.now().year,
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
         )
 
 #This method is for Creating Bubble chart
@@ -1214,7 +1214,7 @@ def data2():
     return render_template(
         'stock1.html', 
         year=datetime.now().year,
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
         )
 
 import csv
@@ -1272,7 +1272,7 @@ def cam():
         
         year=datetime.now().year,
        
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
     )
 ###############################
 ########## Face Tracking############
@@ -1281,7 +1281,7 @@ def face_tracking():
     return render_template(
                            'track.html',
                            year=datetime.now().year,
-                            app_name='Hridalysis',
+                            app_name='Hrydyalysis',
                            )
 #############################
 @app.route('/face_stat', methods=['GET','POST'])
@@ -1324,7 +1324,7 @@ def ECG():
     return render_template(
                            'ECG.html',
                            year=datetime.now().year,
-                            app_name='Hridalysis',
+                            app_name='Hrydyalysis',
                            )
 ######### Traffic accident data analysis
 @app.route('/traffic')
@@ -1346,6 +1346,6 @@ def traffic():
         title='About',
         year=datetime.now().year,
         message='This is Rupams First Flask App.',
-        app_name='Hridalysis',
+        app_name='Hrydyalysis',
 
     )
