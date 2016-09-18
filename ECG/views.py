@@ -178,7 +178,9 @@ def hello():
     import matplotlib
     matplotlib.use('Agg')
     #matplotlib.pyplot.close("all")
-    start = time()
+    import time
+    
+    start = time.process_time()
     global lno
     global leads
     global tab
@@ -370,13 +372,13 @@ def hello():
     rpos=stat['rloc'].values
     avgR=int(len(l2s)/len(stat['rloc'].values))
     print (avgR)
-    TWND=int(sr*.2)# t appears after r after about .2s . I am taking it only .15s
-    TSWND=int(sr*.2)#T width is about .2 s so from center it is about 1 sec
+    TWND=int(sr*.12)# t appears after r after about .2s . I am taking it only .15s
+    TSWND=int(sr*.15)#T width is about .2 s so from center it is about 1 sec
    
     QWND=int(sr*.02)
     QSWND=int(sr*.25)
     
-    PWND=int(sr*.1)#QRS Complex is about .08 sec. so p should appear  about .04sec before R
+    PWND=int(sr*.08)#QRS Complex is about .08 sec. so p should appear  about .04sec before R
     PSWND=int(sr*.1)
     RWDTH=int(sr/18)
     #SWND=int(RWDTH/2)
@@ -1121,7 +1123,9 @@ def hello():
     
     tab=tab+diag
     tab=tab+'<hr/>'
-    tab=tab+'<i>Total Processing time='+endlog(start)+'</i>'
+    end=time.process_time();
+    elapsed = end-start
+    tab=tab+'<i>Total Processing time='+str(elapsed)+' s</i>'
     #Heart Beat Rate============================== 
     #matplotlib.pyplot.close("all")
     # ECG Processing Completed-----------------------------
