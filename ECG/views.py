@@ -227,7 +227,7 @@ def hello():
     #        1  Hz= N/sr "
     #        .05 Hz= N*.05/ sr
     startS=int(.05*N/sr)+1
-    endS=int(30*N/sr)
+    endS=int(40*N/sr)
     l2s=l2[1:N]
     #Perform fft.............................
      
