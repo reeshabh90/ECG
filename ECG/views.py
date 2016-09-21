@@ -119,11 +119,12 @@ def ecg():
            yAxis=yAxis,
            year=datetime.now().year,
            data=tab,
-           app_name='ECG',
+           app_name='Hrydyalysis',
         )
     except  Exception:
         if traceback.format_exc().find("url")!=-1:
             tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+'<br/>'
+            print (traceback.format_exc())
         else:
             tab='<h2><p style = "color: red">Cant Process The Signal </p></h2>'+tab+'<br/>'+traceback.format_exc()
         chartID = 'ecgChart';
@@ -372,7 +373,7 @@ def hello():
     rpos=stat['rloc'].values
     avgR=int(len(l2s)/len(stat['rloc'].values))
     print (avgR)
-    TWND=int(sr*.12)# t appears after r after about .2s . I am taking it only .15s
+    TWND=int(sr*.15)# t appears after r after about .2s . I am taking it only .15s
     TSWND=int(sr*.20)#T width is about .2 s so from center it is about 1 sec
    
     QWND=int(sr*.02)
@@ -559,11 +560,15 @@ def hello():
             r=TSWND
             Tmin=np.abs(np.min(ss[n:n+r]))
             Tmax=np.max(ss[n:n+r])
-            if Tmax >Tmin:
-               m=np.max(ss[n:n+r])
-               p=np.where(ss[n:n+r]==m)
-            else:
-                m=np.min(ss[n:n+r])
+            try:
+                if Tmax >Tmin  :
+                    m=np.max(ss[n:n+r])
+                    p=np.where(ss[n:n+r]==m)
+                else:
+                    m=np.min(ss[n:n+r])
+                    p=np.where(ss[n:n+r]==m)
+            except:
+                m=np.max(ss[n:n+r])
                 p=np.where(ss[n:n+r]==m)
             p=p[0][0]+n
             #print(p)
@@ -706,31 +711,31 @@ def hello():
     last=-300;
     #ss=list(l2s)
     for index in range(len(ploc)):
-        n=ploc[index]-int(sr*.05)
+        n=ploc[index]-int(sr*.03)
     
         
-        if(n-sr*.1)<0:
+        if(n-sr*.08)<0:
            pon.append(0)
         else:
 
            #find maxima in the range
-           r=int(sr*.1)
-           m=min(zcl[n-r:n])
-           p=np.where(zcl[n-r:n]==m)
+           r=int(sr*.08)
+           m=min(ss[n-r:n])
+           p=np.where(ss[n-r:n]==m)
            p=(p[0][len(p[0])-1]+n-r)#closeset 0 crosssing
            m=(ss[p])
            pon.append(p)
        
-        n=ploc[index]+int(sr*.05)
+        n=ploc[index]+int(sr*.03)
         
         if(n+sr*.1)>=len(l2s):
            poff.append(0)
         else:
            #find maxima in the range
-           r=int(sr*.1)
+           r=int(sr*.08)
            try:
-               m=min(zcl[n:qloc[index]])
-               p=np.where(zcl[n:qloc[index]]==m)
+               m=min(ss[n:n+r])
+               p=np.where(ss[n:n+r]==m)
                p=(p[0][0]+n)
                m=(ss[p])
                poff.append(p)
@@ -858,7 +863,7 @@ def hello():
             if qtval > qtMax:
                 qtMax=qtval
         if ploc[index]>0 and rloc[index]>0:
-           pr=pr+ron[index]-pon[index]
+           pr=pr+qon[index]-pon[index]
         if last!=-300 :
             diff.append(rloc[index]-last)
             diffA.append(ramp[index]-ramp[index-1]);
@@ -1034,17 +1039,18 @@ def hello():
             bpmVar.append(epochBpm)
             timeRef.append((index+1)*6)
             beats=beats+' '+str(epochBpm)
-        if epil >=0:
+        if epil >=0 and succ_tp>420 and stdRloc<20:
            diag=diag+'<br/><p style="color:red"><b>Major Heart Beat Change Detected at '+str(epil) +' s:<br/>Strong case of Epillepsy</b><br/> </p>'
-            
+           #abnormal=1
+           epil=5
+           fig1=plt.figure(figsize=(6,4))
+           plt.plot(timeRef,bpmVar)
+           plt.ylabel('Beat in BPM')
+           plt.title('Intermediate Heart Beats')
+           fig1.tight_layout()
+           tab=tab+'<br/>'+mpld3.fig_to_html(fig1)+'<br/>' 
           
-        fig1=plt.figure(figsize=(6,4))
-       
-        plt.plot(timeRef,bpmVar)
-        plt.ylabel('Beat in BPM')
-        plt.title('Intermediate Heart Beats')
-        fig1.tight_layout()
-        tab=tab+'<br/>'+mpld3.fig_to_html(fig1)+'<br/>'
+        
     
     #T-Wave Alternan
     for index in range(0,len(tamp)-4,4):
@@ -1069,9 +1075,9 @@ def hello():
     
     #Obstructive Sleep Apnea Conditions.....................
     #https://www.researchgate.net/publication/254039441_Detection_of_obstructive_sleep_apnea_through_ECG_signal_features    
-    if st<170 and pr>190 and stdRamp>4 and succ_tp>275 and (abnormal==0) and st>=40 and sr_ratio<0 and stdRloc <20 and pr_ratio>.02 :
+    if st<170  and stdRamp>4 and succ_tp>420 and (abnormal==0) and  sr_ratio<0 and stdRloc <20 and pr_ratio>.02 :
         abnormal=1
-        if avst>.1 and tampAvg<0:
+        if avst>.1 and tampAvg<-.04:
             diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD[T inversion] Detected</b></p>'
             abnormal=1
         else:
@@ -1081,7 +1087,7 @@ def hello():
     #1. Progonestics: CHF
     
    
-    if(twa >2) and  stdRloc<20 and abnormal==0 and pr_ratio>.02:
+    if(twa >2) and  stdRloc<20 and abnormal==0 and pr_ratio>.02 and (tpfMax<.1 or tpfAv>.2):
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>T Wave Alternan[Change in Subsequent T Peak Morphology] Detected</b></p>'
         diag=diag+'<br/> TWA amy lead to Ventricular Arrhythmia'
@@ -1093,13 +1099,13 @@ def hello():
         abnormal=1
         if Qtc >460:
             diag=diag+'<br/><p style="color:red"><b>Hypertension[Qtc>460ms] Detected</b></p>'
-    if sr_slope<.5 or sr_ratio>.1 and (qrs_ms>100 and (succ_tp>250)) and pr_ratio>=.02 and abnormal==0:
+    if sr_slope<.5 or sr_ratio>.1 and (qrs_ms>100 and (tpfMax>.12)) and pr_ratio>=.02 and abnormal==0:
         #Ventricular Tachycardia
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[S R Slope<= .50 | Positive S Peak] Detected</b></p>'
         diag=diag+"<br/> This is due to Fat R-Reak. R and S forms a Notch or Side Rabit"
    
-    if stdRloc>20 and  stdRloc<120 and(qrs_ms>100 or succ_tp>250 or  rt>220 or Qtc>450 )and abnormal==0 and pr_ratio>=.02 :
+    if stdRloc>20 and  stdRloc<120 and(qrs_ms>100 or tpfMax>.12 or  rt>220 or Qtc>450 )and abnormal==0 and pr_ratio>=.02 :
         #Ventricular Tachycardia
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[Rloc Std >20] Detected</b></p>'
@@ -1112,7 +1118,7 @@ def hello():
     if (avst!=0) and (st >160) and (Qtc>460) and (abnormal==0) and (pr_ratio>=.02):
         abnormal=1
         diag='<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [Qtc>440,ST>160>Non isoelectric ST] Detected</b></p>'
-    if tp_slope>.3 and (qrs_ms<100 and (succ_tp<50 or succ_tp>300)) and abnormal==0:
+    if tp_slope>.3 and (qrs_ms<100 and (succ_tp<50 )) and abnormal==0:
         diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [TP Slope>.3 @ normal Qrs and Abnormal TP Segment] Detected</b></p>'
         diag=diag+'<br/>Suggests a possible valley between T and P'
         abnormal=1
@@ -1122,11 +1128,11 @@ def hello():
     
    #Sleep Apnea Condition ends here............................................................
    #Atrial Fibrillation........................ ( Missing p Wave)
-    if (tpfMax >=.4) and (abnormal==0) and (pr_ratio>=.02) and signed_sr<0 :
+    if (abnormal==0) and (((tpfMax >=.4) or (tpfMax>.3 and tpfAv>.12)) and ((pr_ratio>.02) and signed_sr<0) ):
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Atrial Fibrillation [Presence of Atrial Wave between T and P] Detected</b></p>'
         diag=diag+'Possible case of <u>Artrial Flutter[AFL]</u>'
-    if (avtp >=.1) and (abnormal==0) and (pr_ratio<.02) and signed_sr<0:
+    if  (abnormal==0) and (pr_ratio<=.02) and signed_sr<0:
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Atrial Fibrillation [Presence of Atrial Wave between T and P, Missing P] Detected</b></p>'
     if pr_ratio<.02 and (abnormal==0) and(avtp<.1) and signed_sr<0:
@@ -1159,16 +1165,17 @@ def hello():
           diag=diag+'<br/><b><p style= "color: red"> Torsades de Pointes:-Ventricular Tachycardia[ Qtc >500 ms]</b></p></h3>'
           abnormal=1
 
-    if (qrs_ms>120 or  Qtc > 460 or pr>200) and avst<-.15 and abnormal==0 and pr_ratio>.02:
+    if (qrs_ms>120 or  Qtc > 460 or pr>200 and tpfMax>.12) and avst<-.15 and abnormal==0 and pr_ratio>.02:
           diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD [ST Segmented Elevated] Detected</b></p>'
           abnormal=1
-    if (qrs_ms>120 or  Qtc > 460 or pr>200 and succ_tp>260) and avst>.15 and abnormal==0 and pr_ratio>.02:
+    if (qrs_ms>120 or  Qtc > 460 or pr>210 or succ_tp>420) and avst>.15 and abnormal==0 and pr_ratio>.02:
           diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD [ST Segmented Depression] Detected</b></p>'
           abnormal=1
-    if (bpm >=60) and (bpm <=120)  and abnormal==0 and qrs_ms>50 and qrs_ms<100 and (pr<200 or succ_tp<260)and st<150 and st >50:
+    if (bpm >=60) and (bpm <=120)  and abnormal==0 and qrs_ms>50 and qrs_ms<100 and (pr<205 and tpfMax<.4)and st<150 and st >50 :
         diag=diag+'<br/><b><p style= "color: green"> Normal Synus Rhythm</b></p></h3>'
     else:
-        diag=diag+'<br/><b><p style= "color: red"> Possible Case of Arrhythmia</p></b><hr/>'
+        if abnormal==0:
+           diag=diag+'<br/><b><p style= "color: red"> Possible Case of Coronary Artery Disease CAD[Aggregated Conditions]</p></b><hr/>'
     
     
     tab=tab+diag
