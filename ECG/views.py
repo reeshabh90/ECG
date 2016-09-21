@@ -123,7 +123,7 @@ def ecg():
         )
     except  Exception:
         if traceback.format_exc().find("url")!=-1:
-            tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+'<br/>'
+            tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+traceback.format_exc()+'<br/>'
         else:
             tab='<h2><p style = "color: red">Cant Process The Signal </p></h2>'+tab+'<br/>'+traceback.format_exc()
         chartID = 'ecgChart';
@@ -226,7 +226,7 @@ def hello():
     # Hence, sr Hz=N samples
     #        1  Hz= N/sr "
     #        .05 Hz= N*.05/ sr
-    startS=int(.05*N/sr)+1
+    startS=int(.5*N/sr)+1
     endS=int(40*N/sr)
     l2s=l2[1:N]
     #Perform fft.............................
@@ -373,7 +373,7 @@ def hello():
     avgR=int(len(l2s)/len(stat['rloc'].values))
     print (avgR)
     TWND=int(sr*.12)# t appears after r after about .2s . I am taking it only .15s
-    TSWND=int(sr*.15)#T width is about .2 s so from center it is about 1 sec
+    TSWND=int(sr*.20)#T width is about .2 s so from center it is about 1 sec
    
     QWND=int(sr*.02)
     QSWND=int(sr*.25)
@@ -559,11 +559,11 @@ def hello():
             r=TSWND
             Tmin=np.abs(np.min(ss[n:n+r]))
             Tmax=np.max(ss[n:n+r])
-            if Tmax >=ss[n]:
-               m=max(ss[n:n+r])
+            if Tmax >Tmin:
+               m=np.max(ss[n:n+r])
                p=np.where(ss[n:n+r]==m)
             else:
-                m=min(ss[n:n+r])
+                m=np.min(ss[n:n+r])
                 p=np.where(ss[n:n+r]==m)
             p=p[0][0]+n
             #print(p)
@@ -814,7 +814,8 @@ def hello():
     #BPM And Qrs Complex
     rloc=stat['rloc'].values
     last=-300
-    diff=0
+    diff=[]
+    diffA=[];#R amplitude Difference for Apnea
     qrs=0;
     ploc=stat['ploc'].values
     rloc=stat['rloc'].values
@@ -836,6 +837,7 @@ def hello():
     qrsMin=9999999;
     qrsMax=-1;
     rt=0;
+    diff=[]
     for index in range(len(rloc)):
         if(ton[index]>0):
             rt=rt+ton[index]-ron[index]
@@ -858,14 +860,14 @@ def hello():
         if ploc[index]>0 and rloc[index]>0:
            pr=pr+ron[index]-pon[index]
         if last!=-300 :
-            diff=diff+rloc[index]-last
-             
+            diff.append(rloc[index]-last)
+            diffA.append(ramp[index]-ramp[index-1]);
             last=rloc[index]
             
         else :
             last=rloc[index]
-
-    diff=diff/(len(rloc)-1)    
+    stdRloc=np.std(diff)
+    diff=np.mean(diff)    
     qrs=qrs/len(rloc);
     st=st/len(rloc)
     qt=qt/len(rloc)
@@ -889,7 +891,9 @@ def hello():
     
     #Ratio of R and S for Apnea
     avR=np.mean(ramp)
-    avS=np.abs(np.mean(samp))
+    stdRamp=np.mean(np.abs(diffA))*100/avR
+    
+    avS=(np.mean(samp))
     sr_slope=np.mean(np.array(ramp)-np.array(samp))/avR
     sr_slope=int(sr_slope*100)/100
     signed_avS=np.mean(samp)
@@ -905,16 +909,52 @@ def hello():
     avtp_max=0
     avtp_min=0;
     succ_tp=0
+    tpAll=0*ss;
     for index in range(1,len(tloc)-1):
         if ploc[index+1] > tloc[index] and ploc[index+1]!=0: 
-           avtp=avtp+np.abs(np.mean(ss[tloc[index]:ploc[index+1]]-ss[pon[index]]))
-           avtp_max=avtp_max+(np.max(ss[tloc[index]:ploc[index+1]]-ss[pon[index]]))
-           avtp_min=avtp_min+(np.min(ss[tloc[index]:ploc[index+1]]-ss[pon[index]]))
+           try:
+                a=((ss[toff[index]:pon[index+1]]-ss[pon[index+1]]))
+                if(len(a)>0):
+                   tpAll[toff[index]:pon[index+1]]=ss[toff[index]:pon[index+1]]
+                   avtp=avtp+np.mean(np.abs(a))
+                  
+                   avtp_max=avtp_max+np.max(a)
+                   
+                   avtp_min=avtp_min+np.min(a)
+           except:
+               a=0
+
         if index>0:
             if tloc[index-1] >0:
                 succ_tp=succ_tp+ploc[index]-tloc[index-1]
     
-                
+    #Getting FFT of TP Segment for Artrial Wave Detection
+    tpf = np.fft.fft(tpAll,N)
+    
+    tpf=np.abs(tpf);
+    tpf=tpf/np.max(tpf)
+    # Bandpassing between 3 HZ to 8 HZ
+    #Artrial waves appear at about 300bpm
+    #https://en.wikipedia.org/wiki/Atrial_fibrillation#Diagnosis
+    startS=int(3*N/sr)+1
+    last=8
+    endS=int(last*N/sr)
+    tpf=tpf[0:N/2-1]
+    
+    z=tpf[startS:endS]
+    
+    tpf=z
+    tpfAv=np.around(np.mean(tpf),3)
+    tpfMax=np.around(np.max(tpf),3)
+    #Plot FFT.......................
+    
+    fig1=plt.figure(figsize=(6,3))
+    plt.plot(tpf)
+    plt.grid()
+    plt.title('fft of lead TP Segment')
+    fig1.tight_layout()
+    tab=tab+'<br/>'+mpld3.fig_to_html(fig1)+'<br/>'            
+    tab=tab+'<br/><b> Average Magnitude of TP Segment='+str(tpfAv)+'Max Mag='+str(tpfMax) +'</b><br/>'
     succ_tp=succ_tp/len(tloc)
     succ_tp=int(succ_tp*1000/sr)
     avtp=avtp/len(tloc)
@@ -926,20 +966,27 @@ def hello():
     #Cordant of T and R
     rsign=avR/np.abs(avR)
     tsign=avT/np.abs(avT)
+    tampAvg=np.mean(tamp);
     #Detection of ST Segment Elevation and Depression
     avst=0
     for index in range(1,len(sloc)):
         if tloc[index] > sloc[index] and tloc[index]!=0: 
-           avst=avst+np.mean(l2s[sloc[index]:tloc[index]])
+           a=l2s[soff[index]:ton[index]]
+           if(len(a)>0):
+               avst=avst+np.mean(a)
     avst=avst/len(sloc)
-    avst=int(avst*100/avR)/100
+    avst=int(avst*100/tampAvg)/100
+    stdRamp=int(stdRamp*100)/100 
     tab=tab+'<hr/>' 
-    tab=tab+'<br/><b>Avg RR-Interval[Normal:600ms-1s]='+str(rrint) +'ms</b>' 
+    tab=tab+'<br/><b>Avg RR-Interval[Normal:600ms-1s]='+str(rrint) +'ms</b>'
+    tab=tab+'<br/> Std Deviation of RR Interval[Normal~0]='+str(int(stdRloc*100)/100 )
+    tab=tab+'<br/> % of R Amp Variation[Normal~0]='+str(stdRamp)
     t_btn_r= float(diff)/sr; #assuming sampling rate=500
     bpm=int(60.0/t_btn_r)
     tab=tab+'<br/><b> Average Heart Beat Rate[Normal at rest:60-100 bpm]='+str(bpm)+' bpm</b>'
     tab=tab+'<br/><b> Average QRS[Normal:60-100ms]='+str(qrs_ms)+' ms</b>'
     tab=tab+'<br/><b> Average ST Segment[Normal:50-150ms]='+str(st)+' ms</b>'
+    tab=tab+'<br/><b> Average T  Amplitude='+str(tampAvg)+' ms</b>'
     if tsign==rsign:
         tab=tab+'<br/><b> ST is <u>CORDANT</u> to QRs </b>'
     else:
@@ -953,7 +1000,7 @@ def hello():
     tab=tab+'<br/><b> Average TP Segment Amplitude/R amp [Normal:~0]='+str(avtp)+'</b>'
     tab=tab+'<br/><b> Average TP Slope/R amp [Normal:~0]='+str(tp_slope)+'</b></br>TP slope is the difference between max and min in TP segment'
     tab=tab+'<br/><b> Average TP Segment Duration  [Normal:100-250ms]='+str(succ_tp)+' ms</b></br>TP duration is important for Ventricular Abnormality detection'
-    tab=tab+'<br/><b> Average ST Segment Amplitude/R amp [Normal:~0]='+str(avst)+'</b>'
+    tab=tab+'<br/><b> Average ST Segment Amplitude/T amp [Normal:~0]='+str(avst)+'</b>'
     tab=tab+'<br/><b> QRS Dispersion[Normal:<40ms]='+str(qrsDisp)+' ms </b>('+str(int(qrsMin*1000/sr))+','+str(int(qrsMax*1000/sr))+')'
     tab=tab+'<br/><b> Qt Dispersion[]='+str(qtDisp)+' ms</b>('+str(int(qtMin*1000/sr))+','+str(int(qtMax*1000/sr))+')'
     tab=tab+'<br/><b> Corrected Qt or Qtc[340-440]='+str(Qtc)+' ms</b><br/>Uuing Bazetts formula: QTC = QT / sqrt(RR) )'
@@ -1019,71 +1066,66 @@ def hello():
     tab=tab+'<br/><b>T Wave Alternan (TWA) %='+str(altPc)+' </b>'
     #Detailed Diagnosis.......................................................
     tab=tab+'<hr/>'
+    
+    #Obstructive Sleep Apnea Conditions.....................
+    #https://www.researchgate.net/publication/254039441_Detection_of_obstructive_sleep_apnea_through_ECG_signal_features    
+    if st<170 and pr>190 and stdRamp>4 and succ_tp>275 and (abnormal==0) and st>=40 and sr_ratio<0 and stdRloc <20 and pr_ratio>.02 :
+        abnormal=1
+        if avst>.1 and tampAvg<0:
+            diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD[T inversion] Detected</b></p>'
+            abnormal=1
+        else:
+            diag=diag+'<br/><p style="color:red"><b>Obstructive Sleep Apnea[HIGH R Amp variation,PR>200, TP interval>250ms] Detected</b></p>'
+            abnormal=1
+    
     #1. Progonestics: CHF
     
    
-    if(twa >2):
+    if(twa >2) and  stdRloc<20 and abnormal==0 and pr_ratio>.02:
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>T Wave Alternan[Change in Subsequent T Peak Morphology] Detected</b></p>'
         diag=diag+'<br/> TWA amy lead to Ventricular Arrhythmia'
     #Coronary Artery Disease.......................
-    if pr >=200 and sr_slope>=1.15 and succ_tp>=250 and pr_ratio>.02   and tp_slope>.1:
+    if pr >=200 and sr_slope>=1.15 and succ_tp>=275 and pr_ratio>=.02   and tp_slope>.1 and abnormal==0 and stdRamp<7 and stdRloc <20:
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease[PR>200ms, TP Segment>250ms Prominant P,Normal Qtc ] Detected</b></p>'
         diag=diag+'<br/> Commonly CAD affects P. Therefore both P to Qrs and T to P is prolonged. Also ST segment is Elevated or Depressed'
+        abnormal=1
         if Qtc >460:
             diag=diag+'<br/><p style="color:red"><b>Hypertension[Qtc>460ms] Detected</b></p>'
-    if sr_slope<.5 and (qrs_ms>100 and (succ_tp<50 or succ_tp>500)) and abnormal==0:
+    if sr_slope<.5 or sr_ratio>.1 and (qrs_ms>100 and (succ_tp>250)) and pr_ratio>=.02 and abnormal==0:
         #Ventricular Tachycardia
         abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[S R Slope<= .50 ] Detected</b></p>'
+        diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[S R Slope<= .50 | Positive S Peak] Detected</b></p>'
         diag=diag+"<br/> This is due to Fat R-Reak. R and S forms a Notch or Side Rabit"
    
-    if tp_slope>.6 and (qrs_ms>100 and (succ_tp<50 or succ_tp>500)) and abnormal==0:
+    if stdRloc>20 and  stdRloc<120 and(qrs_ms>100 or succ_tp>250 or  rt>220 or Qtc>450 )and abnormal==0 and pr_ratio>=.02 :
         #Ventricular Tachycardia
         abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[TP_Slope/R>.6] Detected</b></p>'
+        diag=diag+'<br/><p style="color:red"><b>Ventricular Tachycardia[Rloc Std >20] Detected</b></p>'
         diag=diag+'<br/>This is an indication of Fusion Beats(intermediate qrs like morphology) in TP segment'
     #Malignant Ventricular Ectopy:- P wave will be after Q
     qp=np.mean(qloc-ploc)
     if (rsign!=tsign) and (Qtc >460 ) and (abnormal==0) and (np.abs(avst)>.08):
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [Qtc>460, Discordant ST,ST Segment non isoelectric] Detected</b></p>'
-    if (avst!=0) and (st >160) and (Qtc>460) and (abnormal==0) and (pr_ratio>.02):
+    if (avst!=0) and (st >160) and (Qtc>460) and (abnormal==0) and (pr_ratio>=.02):
         abnormal=1
         diag='<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [Qtc>440,ST>160>Non isoelectric ST] Detected</b></p>'
     if tp_slope>.3 and (qrs_ms<100 and (succ_tp<50 or succ_tp>300)) and abnormal==0:
         diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [TP Slope>.3 @ normal Qrs and Abnormal TP Segment] Detected</b></p>'
         diag=diag+'<br/>Suggests a possible valley between T and P'
         abnormal=1
-    if ((qp <=0) or bpm<50 )and (abnormal==0) :
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Malignant Ventricular Ectopy(Premature Ventricular Complex) [Skipped Beat] Detected</b></p>'
    
-    #General Arrhythmia...................
-    if (st >160) and (qrs_ms>100) and (abnormal==0) and (pr_ratio>.02):
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Arrhythmia [HIGH ST Segment: st>160ms, QRS>100ms] Detected</b></p>'
-    #Obstructive Sleep Apnea Conditions.....................
+   
     
-    if Qtc < 440 and qrs_ms>120 and  qrs_ms<160 and sr_ratio<.5 and signed_sr<0 and st<150 and pr_ratio>.02 and (abnormal==0) and st>=50:
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Obstructive Sleep Apnea [Long QRS: Qrs>120ms] Detected</b></p>'
-    if sr_ratio >=.6 and qrs_ms<120 and (abnormal==0) and (avtp<.1) and (pr_ratio>.02) and np.mean(samp)/avgR >0 and st>=50:
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Obstructive Sleep Apnea [Deep S wave: S/R>.6] Detected</b></p>'
-    if sr_ratio >=.5 and qrs_ms>120 and abnormal==0 and (signed_sr <0) and st>=50:
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Obstructive Sleep Apnea [Relatively Deep S wave: S/R>.5, Long QRS: QRS>120ms] Detected</b></p>'
-    if sr_ratio >.6 and qrs_ms>120 and abnormal==0 and signed_sr<0 and st>=50:
-        abnormal=1
-        diag=diag+'<br/><p style="color:red"><b>Obstructive Sleep Apnea [Very Deep S wave: S/R>.6, QRS>120ms] Detected</b></p>'
     
    #Sleep Apnea Condition ends here............................................................
    #Atrial Fibrillation........................ ( Missing p Wave)
-    if (avtp >=.1) and (abnormal==0) and (pr_ratio>.02) and signed_sr<0:
+    if (tpfMax >=.4) and (abnormal==0) and (pr_ratio>=.02) and signed_sr<0 :
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Atrial Fibrillation [Presence of Atrial Wave between T and P] Detected</b></p>'
+        diag=diag+'Possible case of <u>Artrial Flutter[AFL]</u>'
     if (avtp >=.1) and (abnormal==0) and (pr_ratio<.02) and signed_sr<0:
         abnormal=1
         diag=diag+'<br/><p style="color:red"><b>Atrial Fibrillation [Presence of Atrial Wave between T and P, Missing P] Detected</b></p>'
@@ -1115,10 +1157,18 @@ def hello():
             abnormal=1
     if Qtc > 500 and abnormal==0:
           diag=diag+'<br/><b><p style= "color: red"> Torsades de Pointes:-Ventricular Tachycardia[ Qtc >500 ms]</b></p></h3>'
-    if (bpm >=60) and (bpm <=120)  and abnormal==0:
+          abnormal=1
+
+    if (qrs_ms>120 or  Qtc > 460 or pr>200) and avst<-.15 and abnormal==0 and pr_ratio>.02:
+          diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD [ST Segmented Elevated] Detected</b></p>'
+          abnormal=1
+    if (qrs_ms>120 or  Qtc > 460 or pr>200 and succ_tp>260) and avst>.15 and abnormal==0 and pr_ratio>.02:
+          diag=diag+'<br/><p style="color:red"><b>Coronary Artery Disease CAD [ST Segmented Depression] Detected</b></p>'
+          abnormal=1
+    if (bpm >=60) and (bpm <=120)  and abnormal==0 and qrs_ms>50 and qrs_ms<100 and (pr<200 or succ_tp<260)and st<150 and st >50:
         diag=diag+'<br/><b><p style= "color: green"> Normal Synus Rhythm</b></p></h3>'
     else:
-        diag=diag+'<br/><b><p style= "color: red"> Heart Beat Rate Abnormal</p></b><hr/>'
+        diag=diag+'<br/><b><p style= "color: red"> Possible Case of Arrhythmia</p></b><hr/>'
     
     
     tab=tab+diag
@@ -1126,6 +1176,7 @@ def hello():
     end=time.process_time();
     elapsed = end-start
     tab=tab+'<i>Total Processing time='+str(elapsed)+' s</i>'
+    plt.close('all') 
     #Heart Beat Rate============================== 
     #matplotlib.pyplot.close("all")
     # ECG Processing Completed-----------------------------
