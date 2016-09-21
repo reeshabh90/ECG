@@ -123,7 +123,7 @@ def ecg():
         )
     except  Exception:
         if traceback.format_exc().find("url")!=-1:
-            tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+traceback.format_exc()+'<br/>'
+            tab='<h2><p style = "color: red">Data Fetch Time out. Please try again</p></h2>'+tab+'<br/>'
         else:
             tab='<h2><p style = "color: red">Cant Process The Signal </p></h2>'+tab+'<br/>'+traceback.format_exc()
         chartID = 'ecgChart';
